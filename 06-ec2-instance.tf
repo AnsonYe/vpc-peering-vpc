@@ -1,7 +1,7 @@
 # SSH KEY
 resource "aws_key_pair" "deployer" {
   key_name   = "deployer-key"
-  public_key = file("~/.ssh/id_rsa.pub")
+  public_key = var.public_key
 }
 
 # 在第一个子网中创建 EC2 实例
