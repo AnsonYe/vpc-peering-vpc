@@ -1,6 +1,7 @@
 # 默认安全组
 resource "aws_default_security_group" "default" {
-  vpc_id = aws_vpc.vpc1.id
+  provider = aws.tokyo
+  vpc_id   = aws_vpc.vpc1.id
 
   tags = {
     Name = "VPC1"
@@ -46,6 +47,7 @@ resource "aws_security_group_rule" "allow_all" {
 
 # 创建的安全组
 resource "aws_security_group" "vpc2" {
+  provider    = aws.osaka
   name        = "vpc2"
   description = "VPC2 security group"
   vpc_id      = aws_vpc.vpc2.id
@@ -56,6 +58,7 @@ resource "aws_security_group" "vpc2" {
 }
 # Allow 22 (SSH)
 resource "aws_security_group_rule" "allow_ssh2" {
+  provider          = aws.osaka
   type              = "ingress"
   from_port         = 22
   to_port           = 22
@@ -65,6 +68,7 @@ resource "aws_security_group_rule" "allow_ssh2" {
 }
 # Allow 80 (HTTP)
 resource "aws_security_group_rule" "allow_http2" {
+  provider          = aws.osaka
   type              = "ingress"
   from_port         = 80
   to_port           = 80
@@ -74,6 +78,7 @@ resource "aws_security_group_rule" "allow_http2" {
 }
 # Allow Ping (ICMP)
 resource "aws_security_group_rule" "allow_icmp2" {
+  provider          = aws.osaka
   type              = "ingress"
   from_port         = -1
   to_port           = -1
@@ -82,6 +87,7 @@ resource "aws_security_group_rule" "allow_icmp2" {
   security_group_id = aws_security_group.vpc2.id
 }
 resource "aws_security_group_rule" "allow_all2" {
+  provider          = aws.osaka
   type              = "egress"
   from_port         = -1
   to_port           = -1
